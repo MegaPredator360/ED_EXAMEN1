@@ -7,6 +7,10 @@ public:
 	string ingresarNumeros();
 	string confirmacionDefS();
 	string confirmacionDefN();
+	int tamanoString(string texto);
+
+	void guardarUsuario(iteradorLista<usuario>* IteradorUsuario);
+	void guardarPlaylist(iteradorLista<listaReproduccion>* IteradorListaReproduccion);
 
 	// Funciones para validar existencia de datos
 	void mostrarUsuarios(iteradorLista<usuario>* IteradorUsuario);

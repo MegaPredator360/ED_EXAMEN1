@@ -27,6 +27,11 @@ public:
 	string getArtista();
 	int getDuracion();
 
+	// Setters
+	void setNombre(string musiNombre);
+	void setArtista(string musiArtista);
+	void setDuracion(int musiDuracion);
+
 	// Otros Metodos
 	string toString() const;
 };

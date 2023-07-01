@@ -31,6 +31,7 @@ public:
 
 	// Otros Metodos
 	string toString() const;
+	string archivoPlaylist();
 };
 
 #endif // !LISTAREPRODUCCION_H

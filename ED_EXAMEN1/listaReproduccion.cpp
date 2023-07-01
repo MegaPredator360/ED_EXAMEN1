@@ -35,3 +35,8 @@ string listaReproduccion::toString() const
 
 	return valor.str();
 }
+
+string listaReproduccion::archivoPlaylist()
+{
+	return string(Nombre + "/" + _usuario -> getNombre() + "/" + _usuario -> getUsername() + "/" + _usuario -> getTipoSubscripcion() + "/" + _musica -> getNombre() + +"/" + _musica -> getArtista() + "/" + to_string(_musica -> getDuracion()));
+}

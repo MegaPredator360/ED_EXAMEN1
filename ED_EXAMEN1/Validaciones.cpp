@@ -148,6 +148,60 @@ string Validaciones::confirmacionDefN()
 	return (letra);
 }
 
+int Validaciones::tamanoString(string texto)
+{
+	int cantidad = 0;						// Cantidad de letras en el string
+	for (int i = 0; texto[i] != '\0'; i++)	// Contará la cantidad de letras que hay en el string
+	{
+		cantidad++;
+	}
+	return cantidad;
+}
+
+void Validaciones::guardarUsuario(iteradorLista<usuario>* IteradorUsuario)
+{
+	try
+	{
+		string valor;
+		ofstream archivoDatos("datosUsuario.dat");
+		usuario* _usuario = IteradorUsuario -> obtenerElemento();
+
+		while (_usuario != NULL) // Se ira por cada nodo buscando los datos para guardalos, se detendrá cuando un valor sea nulo o no existan más valores en la lista
+		{
+			archivoDatos << _usuario -> archivoUsuario() << "\n";
+			_usuario = IteradorUsuario -> proximoElemento();
+		}
+
+		archivoDatos.close();
+	}
+	catch (exception& e)
+	{
+		throw e;
+	}
+}
+
+void Validaciones::guardarPlaylist(iteradorLista<listaReproduccion>* IteradorListaReproduccion)
+{
+	try
+	{
+		string valor;
+		ofstream archivoDatos("datosPlaylist.dat");
+		listaReproduccion* _listaReproduccion = IteradorListaReproduccion -> obtenerElemento();
+
+		while (_listaReproduccion != NULL) // Se ira por cada nodo buscando los datos para guardalos, se detendrá cuando un valor sea nulo o no existan más valores en la lista
+		{
+			archivoDatos << _listaReproduccion -> archivoPlaylist() << "\n";
+			_listaReproduccion = IteradorListaReproduccion -> proximoElemento();
+		}
+
+		archivoDatos.close();
+	}
+	catch (exception& e)
+	{
+		throw e;
+	}
+}
+
 void Validaciones::mostrarUsuarios(iteradorLista<usuario>* IteradorUsuario)
 {
 	try

@@ -28,10 +28,13 @@ public:
 	string getTipoSubscripcion();
 
 	// Setters
+	void setUsername(string usuaUsername);
+	void setNombre(string usuaNombre);
 	void setTipoSubscripcion(string usuaTipoSubscripcion);
 
 	// Otros Metodos
 	string toString() const;
+	string archivoUsuario();
 };
 
 #endif // !USUARIO_H

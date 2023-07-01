@@ -4,6 +4,7 @@
 #include <wchar.h>		// Para caracteres especiales
 #include <conio.h>		// Para obtener caracter en formato ASCII
 #include <cstdlib>
+#include <fstream>
 #include <stdio.h>
 #include <Windows.h>
 #include <mmsystem.h>

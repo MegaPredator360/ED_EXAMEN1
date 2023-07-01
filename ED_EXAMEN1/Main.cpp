@@ -30,9 +30,9 @@ int main()
 	Validaciones _validaciones;
 
 	// Llamados a punteros
-	musica* _musica;
-	usuario* _usuario;
-	listaReproduccion* _reproduccion;
+	musica* _musica = nullptr;
+	usuario* _usuario = nullptr;
+	listaReproduccion* _reproduccion = nullptr;
 
 	// Nodo para borrar;
 	nodo<listaReproduccion>* _nodoReproduccion;
@@ -49,6 +49,68 @@ int main()
 	string artista;
 	int duracion;
 	string confirmacion;
+
+	//Cargar Archivos - Usuario
+	ifstream cargarUsuario("datosUsuario.dat");
+	if (cargarUsuario.is_open())
+	{
+		string datosUsuario;
+		int cantidadLetras;
+		while (getline(cargarUsuario, datosUsuario))
+		{
+			nombre = datosUsuario.substr(0, datosUsuario.find("/"));
+			datosUsuario.erase(0, _validaciones.tamanoString(nombre) + 1);
+
+			username = datosUsuario.substr(0, datosUsuario.find("/"));
+			datosUsuario.erase(0, _validaciones.tamanoString(username) + 1);
+
+			tipoSubscripcion = datosUsuario.substr(0, datosUsuario.find("/"));
+			datosUsuario.erase(0, _validaciones.tamanoString(tipoSubscripcion) + 1);
+
+			_usuario = new usuario(nombre, username, tipoSubscripcion);
+			_listaUsuario.agregar(_usuario);
+		}
+	}
+	cargarUsuario.close();
+
+	//Cargar Archivo - Lista Reproduccion
+	ifstream cargarPlaylist("datosPlaylist.dat");
+	if (cargarPlaylist.is_open())
+	{
+		string datosPlaylist;
+		int cantidadLetras;
+		while (getline(cargarPlaylist, datosPlaylist))
+		{
+			nombreLista = datosPlaylist.substr(0, datosPlaylist.find("/"));
+			datosPlaylist.erase(0, _validaciones.tamanoString(nombreLista) + 1);
+
+			nombre = datosPlaylist.substr(0, datosPlaylist.find("/"));
+			datosPlaylist.erase(0, _validaciones.tamanoString(nombre) + 1);
+
+			username = datosPlaylist.substr(0, datosPlaylist.find("/"));
+			datosPlaylist.erase(0, _validaciones.tamanoString(username) + 1);
+
+			tipoSubscripcion = datosPlaylist.substr(0, datosPlaylist.find("/"));
+			datosPlaylist.erase(0, _validaciones.tamanoString(tipoSubscripcion) + 1);
+
+			_usuario = new usuario(nombre, username, tipoSubscripcion);
+
+			nombre = datosPlaylist.substr(0, datosPlaylist.find("/"));
+			datosPlaylist.erase(0, _validaciones.tamanoString(nombre) + 1);
+
+			artista = datosPlaylist.substr(0, datosPlaylist.find("/"));
+			datosPlaylist.erase(0, _validaciones.tamanoString(artista) + 1);
+
+			duracion = stoi(datosPlaylist.substr(0, datosPlaylist.find("/")));
+			datosPlaylist.erase(0, _validaciones.tamanoString(to_string(duracion)) + 1);
+
+			_musica = new musica(nombre, artista, duracion);
+
+			_reproduccion = new listaReproduccion(nombreLista, _usuario, _musica);
+			_listaReproduccion.agregar(_reproduccion);
+		}
+	}
+	cargarPlaylist.close();
 
 	// Pantalla Inicial
 
@@ -236,6 +298,7 @@ int main()
 							{
 								_usuario = new usuario(username, nombre, tipoSubscripcion);
 								_listaUsuario.agregar(_usuario);
+								_validaciones.guardarUsuario(_listaUsuario.obtenerIterador());
 
 								cout << GREEN << "¡Los datos fueron ingresados con exito!" << RESET << endl;
 								system("pause");
@@ -357,6 +420,7 @@ int main()
 						_reproduccion = new listaReproduccion(nombreLista, _usuario, _musica);
 
 						_listaReproduccion.agregar(_reproduccion);
+						_validaciones.guardarPlaylist(_listaReproduccion.obtenerIterador());
 
 						cout << "------------------------------------------" << endl;
 						cout << GREEN << "¡Los datos fueron ingresados con exito!" << RESET << endl;
@@ -405,6 +469,8 @@ int main()
 						_nodoReproduccion = _validaciones.borrarCancion(_listaReproduccion.obtenerIterador(), nombreLista, nombre);
 
 						_listaReproduccion.eliminarNodo(_nodoReproduccion);
+						_validaciones.guardarPlaylist(_listaReproduccion.obtenerIterador());
+
 						cout << "-------------------------------------" << endl;
 						cout << GREEN << "¡La canción ha sido eliminada con exito!" << RESET << endl;
 						system("pause");
@@ -537,6 +603,8 @@ int main()
 							_usuario -> setTipoSubscripcion("Familiar");
 							break;
 						}
+
+						_validaciones.guardarUsuario(_listaUsuario.obtenerIterador());
 
 						cout << "-----------------------------------------------" << endl;
 						cout << GREEN << "La subscripcion fue cambiada con exito" << RESET << endl << endl;

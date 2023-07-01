@@ -22,6 +22,8 @@ string usuario::getNombre() { return Nombre; }
 string usuario::getTipoSubscripcion() { return TipoSubscripcion; }
 
 // Setters
+void usuario::setNombre(string usuaNombre) { Nombre = usuaNombre; }
+void usuario::setUsername(string usuaUsername) { Username = usuaUsername; }
 void usuario::setTipoSubscripcion(string usuaTipoSubscripcion) { TipoSubscripcion = usuaTipoSubscripcion; }
 
 // Otros Metodos
@@ -35,4 +37,9 @@ string usuario::toString() const
 	valor << "----------------------------------------" << endl;
 
 	return valor.str();
+}
+
+string usuario::archivoUsuario()
+{
+	return string(Nombre + "/" + Username + "/" + TipoSubscripcion);
 }
