@@ -440,8 +440,7 @@ int main()
 							getline(cin, nombreLista);
 						}
 
-						IteradorListaReproduccion = _listaReproduccion.obtenerIterador();
-						_validaciones.obtenerDuracionLista(IteradorListaReproduccion, nombreLista);
+						_validaciones.obtenerDuracionLista(_listaReproduccion.obtenerIterador(), nombreLista);
 						system("pause");
 					}
 					catch (exception& e) {

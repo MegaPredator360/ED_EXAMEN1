@@ -493,7 +493,7 @@ void Validaciones::obtenerDuracionLista(iteradorLista<listaReproduccion>* Iterad
 		{
 			cout << "----------------------------------------" << endl;
 
-			_listaReproduccion = IteradorListaReproduccion -> proximoElemento();
+			_listaReproduccion = IteradorListaReproduccion -> obtenerElemento();
 
 			while (_listaReproduccion != NULL)
 			{
